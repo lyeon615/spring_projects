@@ -1,0 +1,8 @@
+package Day01_10;
+
+public class Pencil4B implements Pencil{
+	public void use() {
+		System.out.println("4B Pencil");
+	};
+	
+}

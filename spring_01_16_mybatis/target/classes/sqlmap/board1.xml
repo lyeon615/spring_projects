@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace는 DAO interface와 맞추기 -->
+<mapper namespace="edu.bit.ex.board1.IBDao">
+	
+	<!-- id는 인터페이스 안의 함수명하고 맞추기 -->
+	<select id="listDao" resultType="edu.bit.ex.board1.BoardVO">
+		select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from mvc_board order by bGroup desc, bStep asc	
+	</select>
+
+</mapper>

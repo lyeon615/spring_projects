@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="grade" class="com.javalec.ex.Grade">
+		<property name="first" value="90"/>
+		<property name="second" value="80"/>
+		<property name="third" value="70"/>
+		<property name="fourth" value="60"/>
+	</bean>
+	
+	<bean id="myGrade" class="com.javalec.ex.MyGrade">
+		
+		<property name="grade"><ref bean="grade"/></property>
+		<property name="math" value="70"/>
+		<property name="english" value="30"/>
+		<property name="korean" value="99"/>
+		
+	</bean>
+	
+</beans>
