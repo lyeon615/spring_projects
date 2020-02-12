@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<bean id="student" class="edu.bit.ex.Student">
+		<property name="name" value="유관순"/>
+		<property name="age" value="10"/>
+		<property name="gradeNum" value="3"/>
+		<property name="classNum" value="5"/>
+	</bean>
+	
+	<bean id="worker" class="edu.bit.ex.Worker">
+		<property name="name" value="선우정아"/>
+		<property name="age" value="32"/>
+		<property name="job" value="개발자"/>
+	</bean>
+	
+	<!-- aop 적용 -->
+	<!-- aspect : 공통기능이 들어 있는 클래스(예제, 로깅... 트랜젝션...) -->
+	<!-- advice : aspect 클래스에 들어 있는 공통기능(aspect 안의 함수) -->
+	<!-- joinPoint : advice 함수가 적용되는 함수  -->
+	<!-- pointCut : joinPoint의 부분으로 실제로 적용되는 함수 내의 지점  -->
+	<!-- weaving : advice를 적용하는 행위 -->
+	 
+	<bean id="logAdvice" class="edu.bit.ex.LogAdvice"/>
+	<aop:config>
+		<aop:aspect ref="logAdvice">
+			<!-- id : public method 약자 , expression : edu.bit.ex 밑의 모든 함수에 집어넣겠다.-->
+			<aop:pointcut id="publicM" expression="within(edu.bit.ex.*)"/>
+			<!-- before, after : 공통 함수가 적용되는 위치 , 
+				pointcut-ref : 적용될 함수들 , method : 내가 적용할 공통기능 함수 , -->
+			<aop:before pointcut-ref="publicM" method="printLogging"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<bean id="logAop" class="edu.bit.ex.LogAop"/> 
+	<aop:config>
+		<aop:aspect ref="logAop">
+			<aop:pointcut id="publicM" expression="within(edu.bit.ex.*)"/>
+			<aop:around pointcut-ref="publicM" method="loggerAop"/>
+		</aop:aspect>
+	</aop:config>
+	 
+</beans>
